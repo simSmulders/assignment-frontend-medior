@@ -22,7 +22,10 @@ export const api = createApi({
             providesTags: ['Fruit'],
         }),
         addFruit: builder.mutation<Fruit, Omit<Fruit, 'id'>>({
-            queryFn: (fruit) => resolveAsync({data: fruitsCrud.addItem(fruit)}),
+            queryFn: (fruit) => {
+                console.log(fruit);
+                return resolveAsync({data: fruitsCrud.addItem(fruit)
+            })},
             invalidatesTags: ['Fruit'],
         }),
         updateFruit: builder.mutation<Fruit, Fruit>({

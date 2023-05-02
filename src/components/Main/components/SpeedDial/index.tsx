@@ -1,0 +1,1 @@
+export { ProductSpeedDial } from './SpeedDial';

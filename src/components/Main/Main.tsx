@@ -1,5 +1,6 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
+import { Products } from './components/Products';
+import { ProductSpeedDial } from './components/SpeedDial';
 
 const App = styled.div`
   display: grid;
@@ -31,9 +32,15 @@ const App = styled.div`
 export const Main = () => {
     return (<App>
         <div className="products">
+          <Products />
         </div>
         <div className="product-view"></div>
         <div className="cart"></div>
-        <div className="recent-products"></div>
+        <div className="recent-products">
+          <div>
+            <ProductSpeedDial />
+          </div>
+        </div>
+       
     </App>)
 }
