@@ -1,4 +1,4 @@
-import { 
+import {
   Box,
   SpeedDial,
   SpeedDialIcon,
@@ -28,7 +28,7 @@ export const ProductSpeedDial = (props:ProductSpeedDialProps) => {
   }
 
   return (
-    <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
+    <Box sx={{ right: '25px', bottom: '25px', position: 'fixed' }}>
       <SpeedDial
         ariaLabel="Products overview"
         sx={{ position: 'absolute', bottom: 16, right: 16 }}

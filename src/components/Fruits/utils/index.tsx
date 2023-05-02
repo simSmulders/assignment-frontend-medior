@@ -1,24 +1,31 @@
-import { GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { GridValueGetterParams } from '@mui/x-data-grid';
+import { Tag } from 'types/Tag';
 
-export const getColumns = (tags:string[]) => {
-  console.log(tags);
+export const getColumns = (fruitTags: Tag[]) => {
+
+  const getTags = (params: GridValueGetterParams) => {
+
+    if (!params.value) {
+      return;
+    }
+    return params.value.map((val:string) => fruitTags.find(tag => tag.id === val)?.name)
+  }
+
   return [
   {
     field: 'name',
     headerName: 'Title',
-    width: 150
+    width: 100
   },
   {
     field: 'description',
     headerName: 'Description',
-    width: 200,
+    width: 500,
   },
   {
     field: 'tags',
     headerName: 'Tags',
-    width: 150,
-    valueGetter: (params: GridValueGetterParams) => {
-      
-    }
+    width: 500,
+    valueGetter: getTags
   }
 ]};

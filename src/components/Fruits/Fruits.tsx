@@ -24,27 +24,29 @@ export const Fruits = (props:FruitsProps)=>{
     tags
   })
 
-  const columns = useMemo(() => {
-    return getColumns(tags);
-  }, [ tags ]);
-  
   const { data: fruit, isLoading } = useGetFruitsQuery();
   const { data: fruitTags } = useGetFruitTagsQuery();
+
+  const columns = useMemo(() => {
+    return getColumns(fruitTags || []);
+  }, [ fruitTags ]);
 
   const onRowClick = (params: GridRowParams) => {
     console.log(params);
     setSelectedFruit(params.row)
   }
-  
+
   return (
     <>
       {fruit && fruitTags && (
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box m={4} height={500} >
           <DataGrid
             rows={fruit}
             loading={isLoading}
             columns={columns}
-            onRowClick={onRowClick} />
+            onRowClick={onRowClick}
+            paginationModel={{page: 0, pageSize: 25}}
+          />
         </Box>
       )}
 

@@ -2,8 +2,8 @@ import { useMemo, useState} from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 import { ProductForm } from "components/ProductForm";
-import { 
-	useGetVegetablesQuery, 
+import {
+	useGetVegetablesQuery,
 	useGetVegetableTagsQuery,
 } from 'app/api';
 
@@ -25,17 +25,16 @@ export const Vegetables = (props:VegetablesProps)=>{
     name,
     description,
     tags
-  })
-
-	const columns = useMemo(() => {
-    return getColumns(tags);
-  }, [ tags ]);
+  });
 
   const { data: vegetables, isLoading } = useGetVegetablesQuery();
   const { data: vegetableTags } = useGetVegetableTagsQuery();
 
+	const columns = useMemo(() => {
+    return getColumns(vegetableTags || []);
+  }, [ vegetableTags ]);
+
 	const onRowClick = (params: GridRowParams) => {
-    console.log(params);
     setSelectedVegetable(params.row)
   };
 
@@ -48,6 +47,7 @@ export const Vegetables = (props:VegetablesProps)=>{
             loading={isLoading}
             columns={columns}
             onRowClick={onRowClick}
+            paginationModel={{page: 0, pageSize: 25}}
           />
         </Box>
       )}

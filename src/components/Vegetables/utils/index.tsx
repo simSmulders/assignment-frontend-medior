@@ -1,7 +1,16 @@
+import { GridValueGetterParams } from '@mui/x-data-grid';
+import { Tag } from 'types/Tag';
 
-export const getColumns = (tags: string[]) => {
+export const getColumns = (vegetableTags: Tag[]) => {
 
-  console.log(tags);
+  const getTags = (params: GridValueGetterParams) => {
+
+    if (!params.value) {
+      return '-'
+    }
+
+    return params.value.map((val:string) => vegetableTags.find(tag => tag.id === val)?.name)
+  }
 
   return [
   {
@@ -12,11 +21,12 @@ export const getColumns = (tags: string[]) => {
   {
     field: 'description',
     headerName: 'Description',
-    width: 300,
+    width: 500,
   },
   {
     field: 'tags',
     headerName: 'Tags',
-    width: 250
+    width: 500,
+    valueGetter: getTags
   }
 ]};
