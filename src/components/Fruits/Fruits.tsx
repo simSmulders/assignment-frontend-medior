@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Box } from '@mui/material';
 import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 import { ProductForm } from "components/ProductForm";

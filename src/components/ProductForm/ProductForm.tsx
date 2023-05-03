@@ -68,7 +68,7 @@ export const ProductForm = (props:ProductProps) => {
         <Box
           component="form"
           display="flex"
-          flexDirection="column" 
+          flexDirection="column"
           alignItems="center"
           sx={{
             '& .MuiTextField-root': { m: 1, width: '400px' }
@@ -83,7 +83,7 @@ export const ProductForm = (props:ProductProps) => {
                 id="outlined-required"
                 label="Name"
                 placeholder="Name"
-                {...register("name")} 
+                {...register("name")}
               />
               {errors?.name && <p>{errors.name.message}</p>}
             </div>
@@ -98,7 +98,11 @@ export const ProductForm = (props:ProductProps) => {
             <div>
               <FormGroup sx={{ flexDirection: 'row', m: 1 }}>
                 {productTags && productTags.map(tag => (
-                  <FormControlLabel control={<Checkbox onChange={handleChangeTag} />} label={tag.name} key={tag.id}   />
+                  <FormControlLabel
+                    control={<Checkbox onChange={handleChangeTag} />}
+                    label={tag.name}
+                    key={tag.id}
+                  />
                 ))}
               </FormGroup>
             </div>
