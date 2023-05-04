@@ -41,8 +41,14 @@ export const Vegetables = (props:VegetablesProps)=>{
   return (
     <>
       {vegetables && (
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box m={4} height={500} >
           <DataGrid
+             sx={{
+              '.MuiDataGrid-columnHeaderTitle': {
+                fontWeight: 'bold !important',
+                overflow: 'visible !important'
+              }
+            }}
             rows={vegetables}
             loading={isLoading}
             columns={columns}

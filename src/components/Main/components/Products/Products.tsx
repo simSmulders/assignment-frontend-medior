@@ -59,21 +59,23 @@ export const Products = (props:ProductsProps) => {
     {
       field: 'name',
       headerName: 'Title',
-      width: 100
+      width: 120
     },
     {
       field: 'tags',
       headerName: 'Tags',
-      width: 300,
+      width: 170,
       valueGetter: getTags,
       renderCell: (params: GridRenderCellParams) => (
         params.value ? params.value.map((val: string) => {
           return (
-            <Chip
-              key={val}
-              label={val}
-              color={getColor(val)}
-            />)
+            <Box m='2px'>
+              <Chip
+                key={val}
+                label={val}
+                color={getColor(val)}
+              />
+            </Box>)
         }) : null
       )
     }
@@ -85,10 +87,16 @@ export const Products = (props:ProductsProps) => {
     <>
       {rows && (<Box sx={{ height: 900, width: '100%' }}>
         <DataGrid
+          sx={{
+            '.MuiDataGrid-columnHeaderTitle': {
+              fontWeight: 'bold !important',
+              overflow: 'visible !important'
+            }
+          }}
           rows={rows}
           loading={isLoadingProducts}
           columns={columns}
-          hideFooterPagination
+          hideFooter
         />
       </Box>)}
     </>
