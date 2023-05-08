@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, Typography } from "@mui/material"
 
 export const ProductView = ({...productState}) => {
 
@@ -7,14 +7,19 @@ export const ProductView = ({...productState}) => {
   const { name, description, tags } = state;
 
   return (
-    <Box m={4} flexGrow={1} alignItems="center" >
-      <Typography variant="h2">Selected product:</Typography>
-      <Typography variant="h4">{name}</Typography>
-      <Typography variant="h5">{description}</Typography>
-      <ul>
-        {tags?.map((tag: string) => <li key={tag}>{tag}</li> )}
-      </ul>
-
+    <Box m={4}>
+      <Card>
+        <CardContent>
+          <Typography variant="h4">{name}</Typography>
+          <Typography variant="h6">{description}</Typography>
+          <ul>
+            {tags?.map((tag: string) => <li key={tag}>{tag}</li> )}
+          </ul>
+        </CardContent>
+        <CardActions>
+          <Button>Add to cart</Button>
+        </CardActions>
+      </Card>
     </Box>
   )
 }

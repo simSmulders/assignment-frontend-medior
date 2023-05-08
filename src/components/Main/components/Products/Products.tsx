@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo} from "react";
 import { Box, Chip } from '@mui/material';
 import {
   DataGrid,
@@ -34,7 +34,7 @@ export const Products = (props:ProductsProps) => {
       return;
     }
     return fruits.concat(vegetables).filter(product => !product.isArchived)
-  }, [ fruits, vegetables ])
+  }, [ fruits, vegetables ]);
 
   const getTags = (params: GridValueGetterParams) => {
 
