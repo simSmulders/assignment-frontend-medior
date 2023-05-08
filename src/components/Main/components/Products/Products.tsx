@@ -1,16 +1,28 @@
+import { useEffect, useMemo, useState } from "react";
 import { Box, Chip } from '@mui/material';
-import { DataGrid, GridRenderCellParams, GridValueGetterParams } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridRenderCellParams,
+  GridRowParams,
+  GridValueGetterParams
+} from '@mui/x-data-grid';
 import {
   useGetFruitsQuery,
   useGetVegetableTagsQuery,
   useGetVegetablesQuery,
   useGetFruitTagsQuery
 } from "app/api";
-import { useMemo } from "react";
 
-export interface ProductsProps {};
+export interface ProductsProps {
+  name: string,
+  description: string,
+  tags: string[]
+  onStateChange: (state:{ name: string, description: string, tags: string[]}) => void
+};
 
 export const Products = (props:ProductsProps) => {
+
+  const { onStateChange } = props;
 
   const { data: fruits, isLoading: isLoadingFruits } = useGetFruitsQuery();
   const { data: vegetables, isLoading: isLoadingVegetables } = useGetVegetablesQuery();
@@ -81,11 +93,19 @@ export const Products = (props:ProductsProps) => {
     }
   ]
 
+  const onRowClick = (params: GridRowParams) => {
+
+    const productTags = fruitTags?.concat(vegetableTags || []);
+    const tags = params.row.tags.map((val:string) => productTags?.find(tag => tag.id === val)?.name)
+
+    onStateChange({...params.row, tags});
+  }
+
   const isLoadingProducts = isLoadingFruits && isLoadingVegetables;
 
   return (
     <>
-      {rows && (<Box sx={{ height: 900, width: '100%' }}>
+      (<Box sx={{ height: 900, width: '100%' }}>
         <DataGrid
           sx={{
             '.MuiDataGrid-columnHeaderTitle': {
@@ -93,12 +113,13 @@ export const Products = (props:ProductsProps) => {
               overflow: 'visible !important'
             }
           }}
-          rows={rows}
+          rows={rows ? rows : []}
           loading={isLoadingProducts}
           columns={columns}
           hideFooter
+          onRowClick={onRowClick}
         />
-      </Box>)}
+      </Box>)
     </>
 
   )

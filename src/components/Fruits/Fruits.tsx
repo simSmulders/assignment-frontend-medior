@@ -38,23 +38,21 @@ export const Fruits = (props:FruitsProps)=>{
 
   return (
     <>
-      {fruit && fruitTags && (
-        <Box m={4} height={500} >
-          <DataGrid
-             sx={{
-              '.MuiDataGrid-columnHeaderTitle': {
-                fontWeight: 'bold !important',
-                overflow: 'visible !important'
-              }
-            }}
-            rows={fruit}
-            loading={isLoading}
-            columns={columns}
-            onRowClick={onRowClick}
-            paginationModel={{page: 0, pageSize: 25}}
-          />
-        </Box>
-      )}
+      <Box m={4} height={500} >
+        <DataGrid
+            sx={{
+            '.MuiDataGrid-columnHeaderTitle': {
+              fontWeight: 'bold !important',
+              overflow: 'visible !important'
+            }
+          }}
+          rows={fruit ?? []}
+          loading={isLoading}
+          columns={columns}
+          onRowClick={onRowClick}
+          paginationModel={{page: 0, pageSize: 25}}
+        />
+      </Box>
 
       {fruitTags && <ProductForm {...props} selectedProduct={selectedFruit} productTags={fruitTags} />}
     </>

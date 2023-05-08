@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Products } from './components/Products';
+import { ProductView } from './components/ProductView';
 import { ProductSpeedDial } from './components/SpeedDial';
 
 const App = styled.div`
@@ -30,17 +32,31 @@ const App = styled.div`
 `
 
 export const Main = () => {
+
+    const [ productState, setProductState ] = useState({});
+
+    const handleStateChange = (productState:{
+      name: string,
+      description: string,
+      tags: string[]
+    }) => {
+      console.log(productState);
+      setProductState({ ...productState })
+    }
+
     return (<App>
         <div className="products">
-          <Products />
+          <Products name="" description='' tags={[]} onStateChange={handleStateChange} />
         </div>
-        <div className="product-view"></div>
+        <div className="product-view">
+          <ProductView state={productState} />
+        </div>
         <div className="cart"></div>
         <div className="recent-products">
           <div>
             <ProductSpeedDial />
           </div>
         </div>
-       
+
     </App>)
 }
